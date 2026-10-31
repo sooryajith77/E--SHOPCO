@@ -1,0 +1,629 @@
+/* ============================================
+   BRANDS PAGE STYLES
+   ============================================ */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ============================================
+   BRANDS HEADER
+   ============================================ */
+
+.brands-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.brands-header h1 {
+  font-size: 32px;
+  color: #1a1a1a;
+  margin: 0;
+  font-weight: 700;
+}
+
+.brands-count {
+  color: #666;
+  font-size: 14px;
+  background: #f5f5f5;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+/* ============================================
+   SEARCH BAR
+   ============================================ */
+
+.search-bar {
+  position: relative;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 45px 12px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: white;
+  color: #1a1a1a;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+.search-input::placeholder {
+  color: #999;
+}
+
+.clear-search {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #999;
+  padding: 5px;
+  transition: color 0.3s;
+}
+
+.clear-search:hover {
+  color: #333;
+}
+
+/* ============================================
+   BRANDS GRID
+   ============================================ */
+
+.brands-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
+  margin: 2rem 0;
+}
+
+/* ============================================
+   BRAND CARD
+   ============================================ */
+
+.brand-card {
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-radius: 12px;
+  padding: 25px 20px;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.brand-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
+  border-color: #ddd;
+}
+
+/* Brand Logo */
+.brand-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  background: #f8f8f8;
+  padding: 15px;
+  transition: transform 0.3s ease;
+}
+
+.brand-card:hover .brand-logo {
+  transform: scale(1.05);
+}
+
+/* Brand Placeholder (when no logo) */
+.brand-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 15px;
+  flex-shrink: 0;
+}
+
+.brand-placeholder span {
+  font-size: 48px;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+}
+
+/* Brand Name */
+.brand-card h3 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+/* Brand Description */
+.brand-description {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  display: -webkit-box;
+
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 42px;
+}
+
+/* ============================================
+   PRODUCT COUNT BADGE
+   ============================================ */
+
+.brand-product-count {
+  margin-top: auto;
+  width: 100%;
+  padding-top: 12px;
+}
+
+.product-count-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  background: #f5f5f5;
+  border-radius: 20px;
+  font-size: 13px;
+  color: #555;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.brand-card:hover .product-count-badge {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+/* ============================================
+   LOADING SKELETON
+   ============================================ */
+
+.skeleton {
+  animation: shimmer 1.5s ease-in-out infinite;
+  background: #f0f0f0;
+  border-radius: 12px;
+}
+
+@keyframes shimmer {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.skeleton-image {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 15px;
+  background: #e0e0e0;
+  border-radius: 12px;
+}
+
+.skeleton-text {
+  height: 20px;
+  background: #e0e0e0;
+  margin: 0.5rem auto;
+  border-radius: 4px;
+  width: 80%;
+}
+
+.skeleton-text:last-child {
+  width: 60%;
+}
+
+/* ============================================
+   ERROR STATES
+   ============================================ */
+
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  padding: 2rem;
+}
+
+.error-box {
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 2.5rem;
+  background: #fff5f5;
+  border: 1px solid #fcc;
+  border-radius: 16px;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.error-box h2 {
+  margin: 0 0 10px 0;
+  color: #b71c1c;
+  font-size: 24px;
+}
+
+.error-message {
+  color: #d32f2f;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  font-size: 15px;
+}
+
+.retry-button {
+  background: #d32f2f;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.retry-button:hover {
+  background: #b71c1c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(211, 47, 47, 0.3);
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+  background: #f9f9f9;
+  border-radius: 16px;
+  color: #888;
+}
+
+.empty-state p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 10px 24px;
+  background: #000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .brands-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+}
+
+/* Mobile Large */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .brands-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 1.5rem 0;
+  }
+
+  .brands-header h1 {
+    font-size: 24px;
+  }
+
+  .brands-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+  }
+
+  .brand-card {
+    padding: 20px 15px;
+  }
+
+  .brand-logo {
+    width: 90px;
+    height: 90px;
+    padding: 12px;
+  }
+
+  .brand-placeholder {
+    width: 90px;
+    height: 90px;
+  }
+
+  .brand-placeholder span {
+    font-size: 36px;
+  }
+
+  .brand-card h3 {
+    font-size: 17px;
+  }
+
+  .brand-description {
+    font-size: 13px;
+    min-height: 36px;
+  }
+
+  .search-input {
+    font-size: 15px;
+    padding: 10px 40px 10px 14px;
+  }
+}
+
+/* Mobile Small */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .brands-header h1 {
+    font-size: 20px;
+  }
+
+  .brands-count {
+    font-size: 12px;
+    padding: 4px 12px;
+  }
+
+  .brands-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .brand-card {
+    padding: 15px 12px;
+    border-radius: 10px;
+  }
+
+  .brand-logo {
+    width: 70px;
+    height: 70px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .brand-placeholder {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10px;
+  }
+
+  .brand-placeholder span {
+    font-size: 28px;
+  }
+
+  .brand-card h3 {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .brand-description {
+    font-size: 12px;
+    min-height: 30px;
+    margin-bottom: 8px;
+   
+  }
+
+  .product-count-badge {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+
+  .search-input {
+    font-size: 14px;
+    padding: 8px 36px 8px 12px;
+    border-radius: 8px;
+  }
+
+  .clear-search {
+    font-size: 16px;
+    right: 10px;
+  }
+
+  .empty-state {
+    padding: 40px 20px;
+  }
+
+  .empty-state p {
+    font-size: 15px;
+  }
+
+  .error-box {
+    padding: 1.5rem;
+  }
+
+  .error-box h2 {
+    font-size: 20px;
+  }
+
+  .error-message {
+    font-size: 14px;
+  }
+
+  .retry-button {
+    padding: 8px 20px;
+    font-size: 14px;
+  }
+
+  .btn-primary {
+    padding: 8px 18px;
+    font-size: 13px;
+  }
+}
+
+/* Extra Small */
+@media (max-width: 360px) {
+  .brands-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .brand-card {
+    padding: 12px 8px;
+  }
+
+  .brand-logo {
+    width: 60px;
+    height: 60px;
+    padding: 8px;
+  }
+
+  .brand-placeholder {
+    width: 60px;
+    height: 60px;
+  }
+
+  .brand-placeholder span {
+    font-size: 24px;
+  }
+
+  .brand-card h3 {
+    font-size: 12px;
+  }
+
+  .brand-description {
+    font-size: 10px;
+    min-height: 24px;
+   
+  }
+
+  .product-count-badge {
+    font-size: 10px;
+    padding: 2px 8px;
+  }
+
+  .brands-header h1 {
+    font-size: 18px;
+  }
+}
+
+/* ============================================
+   DARK MODE SUPPORT (Optional)
+   ============================================ */
+
+@media (prefers-color-scheme: dark) {
+  .brand-card {
+    background:white;
+    border-color: black ;
+    border-radius: 20px;
+    height: 450px;
+  }
+
+  .brand-card:hover {
+    border-color: #555;
+  }
+
+  .brand-card h3 {
+    color: #f5f5f5;
+  }
+
+  .brand-description {
+    color: #999;
+  }
+
+  .product-count-badge {
+    background: #2a2a2a;
+    color: #aaa;
+  }
+
+  .brand-card:hover .product-count-badge {
+    background: #1e3a2a;
+    color: #66bb6a;
+  }
+
+  .search-input {
+    background: white;
+    border-color: #333;
+    color: #f5f5f5;
+  }
+
+  .search-input:focus {
+    border-color: #666;
+  }
+
+  .brands-count {
+    background: #2a2a2a;
+    color: #aaa;
+  }
+
+  .empty-state {
+    background: #1a1a1a;
+  }
+
+  .empty-state p {
+    color: #999;
+  }
+
+  .error-box {
+    background: #2a1a1a;
+    border-color: #442222;
+  }
+
+  .error-message {
+    color: #ef5350;
+  }
+
+  .skeleton {
+    background: #2a2a2a;
+  }
+
+  .skeleton-image,
+  .skeleton-text {
+    background: #333;
+  }
+}

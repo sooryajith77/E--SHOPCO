@@ -1,0 +1,91 @@
+ 
+        .footer {
+          background: #f8f8f8;
+          margin-top: 60px;
+          padding-top: 60px;
+        }
+        .footer-top {
+          background: #000;
+          color: white;
+          padding: 40px;
+          border-radius: 20px;
+          margin-bottom: 50px;
+        }
+        .newsletter {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          gap: 20px;
+        }
+        .newsletter h2 {
+          font-size: 24px;
+          max-width: 400px;
+        }
+        .newsletter-form {
+          display: flex;
+          gap: 15px;
+        }
+        .newsletter-form input {
+          padding: 12px 20px;
+          border-radius: 30px;
+          border: none;
+          width: 300px;
+        }
+        .footer-content {
+          display: grid;
+          grid-template-columns: 2fr repeat(4, 1fr);
+          gap: 30px;
+          margin-bottom: 40px;
+        }
+        .footer-section {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+        }
+        .footer-section h3, .footer-section h4 {
+          margin-bottom: 10px;
+        }
+        .footer-section a {
+          text-decoration: none;
+          color: #666;
+        }
+        .social-links {
+          display: flex;
+          gap: 15px;
+        }
+        .social-links a {
+          font-size: 24px;
+        }
+        .footer-bottom {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px 0;
+          border-top: 1px solid #ddd;
+        }
+      .payment-methods {
+  display: flex;
+  gap: 20px; /* Space between icons */
+  align-items: center;
+}
+
+.payment-methods svg {
+  width: 30px;
+  height: 30px;
+  cursor: pointer; /* Optional */
+}
+        @media (max-width: 768px) {
+          .footer-content {
+            grid-template-columns: 1fr;
+          }
+          .newsletter {
+            flex-direction: column;
+            text-align: center;
+          }
+          .footer-bottom {
+            flex-direction: column;
+            gap: 15px;
+          }
+        }
+   

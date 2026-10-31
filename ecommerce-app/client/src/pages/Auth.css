@@ -1,0 +1,296 @@
+/* pages/Auth.css */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20px;
+}
+
+.auth-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 100%;
+  max-width: 500px;
+  transition: transform 0.3s ease;
+}
+
+.register-card {
+  max-width: 550px;
+}
+
+.auth-card:hover {
+  transform: translateY(-5px);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.auth-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.auth-header p {
+  color: #666;
+  font-size: 14px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  font-size: 18px;
+  color: #999;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 12px 40px 12px 40px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 14px;
+  transition: all 0.3s;
+  outline: none;
+}
+
+.input-wrapper input:focus {
+  border-color: #000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.input-wrapper input.error {
+  border-color: #ff4444;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 0;
+  color: #999;
+}
+
+.error-message {
+  font-size: 12px;
+  color: #ff4444;
+  margin-top: 4px;
+}
+
+.password-hint {
+  font-size: 11px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #666;
+}
+
+.checkbox-label input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.forgot-link {
+  font-size: 13px;
+  color: #000;
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+.auth-btn {
+  background: #000;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+}
+
+.auth-btn:hover:not(:disabled) {
+  background: #333;
+  transform: translateY(-2px);
+}
+
+.auth-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.auth-divider {
+  text-align: center;
+  position: relative;
+  margin: 10px 0;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: calc(50% - 80px);
+  height: 1px;
+  background: #e0e0e0;
+}
+
+.auth-divider::before {
+  left: 0;
+}
+
+.auth-divider::after {
+  right: 0;
+}
+
+.auth-divider span {
+  background: white;
+  padding: 0 15px;
+  color: #999;
+  font-size: 12px;
+}
+
+.social-login {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.social-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.social-btn:hover {
+  background: #f5f5f5;
+  transform: translateY(-2px);
+}
+
+.social-btn.google {
+  color: #db4437;
+}
+
+.social-btn.facebook {
+  color: #4267b2;
+}
+
+.social-btn.apple {
+  color: #000;
+}
+
+.auth-footer {
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  margin-top: 20px;
+}
+
+.auth-footer a {
+  color: #000;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Password strength indicator */
+.password-strength {
+  margin-top: 8px;
+}
+
+.strength-bar {
+  height: 4px;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+.strength-text {
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .auth-card {
+    padding: 30px 20px;
+  }
+  
+  .auth-header h1 {
+    font-size: 28px;
+  }
+  
+  .social-login {
+    flex-direction: column;
+  }
+  
+  .form-options {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
