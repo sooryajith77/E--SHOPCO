@@ -1,6 +1,131 @@
 
 
 
+// import React, { useState } from 'react';
+// import { useDispatch } from 'react-redux';
+// import { useNavigate, Link } from 'react-router-dom';
+// import { loginStart, loginSuccess, loginFailure } from '../redux/slices/authSlice';
+// import { authAPI } from '../services/api';
+// import { toast, ToastContainer } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
+// import './Login.css'
+
+// const Login = () => {
+//   const [email, setEmail] = useState('');
+//   const [password, setPassword] = useState('');
+//   const [loading, setLoading] = useState(false);
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     setLoading(true);
+    
+//     // Show loading toast
+//     const toastId = toast.loading('Logging in...');
+    
+//     try {
+//       dispatch(loginStart());
+//       const response = await authAPI.login(email, password);
+      
+//       // Update loading toast to success
+//       toast.update(toastId, {
+//         render: ' Login successful! Welcome back.',
+//         type: 'success',
+//         isLoading: false,
+//         autoClose: 3000,
+//       });
+      
+//       // The response should contain user data with token
+//       dispatch(loginSuccess(response));
+      
+//       // Redirect based on role
+//       setTimeout(() => {
+//         if (response.role === 'admin') {
+//           navigate('/admin');
+//         } else {
+//           navigate('/');
+//         }
+//       }, 500);
+      
+//     } catch (error) {
+//       // ✅ CORRECTED: Use toast.error() with proper syntax
+//       toast.update(toastId, {
+//         render: ` Login failed: ${error.message || 'Please check your credentials.'}`,
+//         type: 'error',
+//         isLoading: false,
+//         autoClose: 4000,
+//       });
+      
+//       // Or simply use:
+//       // toast.error('Login failed. Please check your credentials.');
+      
+//       dispatch(loginFailure(error.message));
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="auth-page">
+//       {/* ✅ Add ToastContainer */}
+//       <ToastContainer
+//         position="top-right"
+//         autoClose={3000}
+//         hideProgressBar={false}
+//         newestOnTop
+//         closeOnClick
+//         rtl={false}
+//         pauseOnFocusLoss
+//         draggable
+//         pauseOnHover
+//         theme="light"
+//       />
+      
+//       <div className="auth-container">
+//         <h2>Login to Your Account</h2>
+//         <form onSubmit={handleSubmit}>
+//           <div className="form-group">
+//             <input
+//               type="email"
+//               placeholder="Email Address"
+//               value={email}
+//               onChange={(e) => setEmail(e.target.value)}
+//               required
+//             />
+//           </div>
+//           <div className="form-group">
+//             <input
+//               type="password"
+//               placeholder="Password"
+//               value={password}
+//               onChange={(e) => setPassword(e.target.value)}
+//               required
+//             />
+//           </div>
+//           <button type="submit" className="btn-primary" disabled={loading}>
+//             {loading ? 'Logging in...' : 'Login'}
+//           </button>
+//         </form>
+        
+//         <div className="demo-credentials">
+//           <p>Demo Credentials:</p>
+//           <p><strong>Admin:</strong> admin@shop.co / admin123</p>
+//           <p><strong>User:</strong> user@example.com / user123</p>
+//         </div>
+        
+//         <p>
+//           Don't have an account? <Link to="/register">Register here</Link>
+//         </p>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Login;
+
+
+
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
@@ -8,7 +133,7 @@ import { loginStart, loginSuccess, loginFailure } from '../redux/slices/authSlic
 import { authAPI } from '../services/api';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './Login.css'
+import './Login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -26,22 +151,31 @@ const Login = () => {
     
     try {
       dispatch(loginStart());
+      
+      // 1. Call the API using your fetch-based authAPI
       const response = await authAPI.login(email, password);
       
-      // Update loading toast to success
+      // Debugging: Log the response to verify the structure in your browser console
+      console.log("Login API Response:", response); 
+
+      // 2. Dispatch to Redux. 
+      // Your authSlice will handle splitting the token and user data.
+      dispatch(loginSuccess(response));
+      
+      // 3. Safely extract the role (handles if backend returns response.user.role OR response.role)
+      const userRole = response.user?.role || response.role;
+
+      // 4. Update loading toast to success
       toast.update(toastId, {
-        render: ' Login successful! Welcome back.',
+        render: 'Login successful! Welcome back.',
         type: 'success',
         isLoading: false,
         autoClose: 3000,
       });
       
-      // The response should contain user data with token
-      dispatch(loginSuccess(response));
-      
-      // Redirect based on role
+      // 5. Redirect based on role after a short delay to let Redux/LocalStorage update
       setTimeout(() => {
-        if (response.role === 'admin') {
+        if (userRole === 'admin') {
           navigate('/admin');
         } else {
           navigate('/');
@@ -49,16 +183,13 @@ const Login = () => {
       }, 500);
       
     } catch (error) {
-      // ✅ CORRECTED: Use toast.error() with proper syntax
+      // 6. Handle error
       toast.update(toastId, {
-        render: ` Login failed: ${error.message || 'Please check your credentials.'}`,
+        render: `Login failed: ${error.message || 'Please check your credentials.'}`,
         type: 'error',
         isLoading: false,
         autoClose: 4000,
       });
-      
-      // Or simply use:
-      // toast.error('Login failed. Please check your credentials.');
       
       dispatch(loginFailure(error.message));
     } finally {
@@ -68,7 +199,7 @@ const Login = () => {
 
   return (
     <div className="auth-page">
-      {/* ✅ Add ToastContainer */}
+      {/* Toast Container for notifications */}
       <ToastContainer
         position="top-right"
         autoClose={3000}

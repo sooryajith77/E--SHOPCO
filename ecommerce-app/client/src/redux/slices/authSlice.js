@@ -1,98 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit';
-
-const initialState = {
-  user: JSON.parse(localStorage.getItem('user')) || null,
-  isAuthenticated: !!localStorage.getItem('user'),
-  loading: false,
-  error: null,
-};
-
-const authSlice = createSlice({
-  name: 'auth',
-  initialState,
-  reducers: {
-    loginStart: (state) => {
-      state.loading = true;
-      state.error = null;
-    },
-    loginSuccess: (state, action) => {
-      state.loading = false;
-      state.isAuthenticated = true;
-      state.user = action.payload;
-      localStorage.setItem('user', JSON.stringify(action.payload));
-    },
-    loginFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
-    logout: (state) => {
-      state.user = null;
-      state.isAuthenticated = false;
-      localStorage.removeItem('user');
-      localStorage.removeItem('token');
-    },
-    registerStart: (state) => {
-      state.loading = true;
-      state.error = null;
-    },
-    registerSuccess: (state, action) => {
-      state.loading = false;
-      state.isAuthenticated = true;
-      state.user = action.payload;
-      localStorage.setItem('user', JSON.stringify(action.payload));
-    },
-    registerFailure: (state, action) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
-  },
-});
-
-export const {
-  loginStart,
-  loginSuccess,
-  loginFailure,
-  logout,
-  registerStart,
-  registerSuccess,
-  registerFailure,
-} = authSlice.actions;
-
-export default authSlice.reducer;
-
-
-
 // import { createSlice } from '@reduxjs/toolkit';
 
-// const loadUserFromStorage = () => {
-//   const user = localStorage.getItem('user');
-//   if (user) {
-//     try {
-//       const parsed = JSON.parse(user);
-//       return {
-//         user: parsed,
-//         isAuthenticated: true,
-//         loading: false,
-//         error: null
-//       };
-//     } catch (e) {
-//       return {
-//         user: null,
-//         isAuthenticated: false,
-//         loading: false,
-//         error: null
-//       };
-//     }
-//   }
-//   return {
-//     user: null,
-//     isAuthenticated: false,
-//     loading: false,
-//     error: null
-//   };
+// const initialState = {
+//   user: JSON.parse(localStorage.getItem('user')) || null,
+//   isAuthenticated: !!localStorage.getItem('user'),
+//   loading: false,
+//   error: null,
 // };
-
-// const initialState = loadUserFromStorage();
 
 // const authSlice = createSlice({
 //   name: 'auth',
@@ -106,8 +19,6 @@ export default authSlice.reducer;
 //       state.loading = false;
 //       state.isAuthenticated = true;
 //       state.user = action.payload;
-//       state.error = null;
-//       // Store in localStorage
 //       localStorage.setItem('user', JSON.stringify(action.payload));
 //     },
 //     loginFailure: (state, action) => {
@@ -118,9 +29,158 @@ export default authSlice.reducer;
 //       state.user = null;
 //       state.isAuthenticated = false;
 //       localStorage.removeItem('user');
-//     }
-//   }
+//       localStorage.removeItem('token');
+//     },
+//     registerStart: (state) => {
+//       state.loading = true;
+//       state.error = null;
+//     },
+//     registerSuccess: (state, action) => {
+//       state.loading = false;
+//       state.isAuthenticated = true;
+//       state.user = action.payload;
+//       localStorage.setItem('user', JSON.stringify(action.payload));
+//     },
+//     registerFailure: (state, action) => {
+//       state.loading = false;
+//       state.error = action.payload;
+//     },
+//   },
 // });
 
-// export const { loginStart, loginSuccess, loginFailure, logout } = authSlice.actions;
+// export const {
+//   loginStart,
+//   loginSuccess,
+//   loginFailure,
+//   logout,
+//   registerStart,
+//   registerSuccess,
+//   registerFailure,
+// } = authSlice.actions;
+
 // export default authSlice.reducer;
+
+
+
+// // import { createSlice } from '@reduxjs/toolkit';
+
+// // const loadUserFromStorage = () => {
+// //   const user = localStorage.getItem('user');
+// //   if (user) {
+// //     try {
+// //       const parsed = JSON.parse(user);
+// //       return {
+// //         user: parsed,
+// //         isAuthenticated: true,
+// //         loading: false,
+// //         error: null
+// //       };
+// //     } catch (e) {
+// //       return {
+// //         user: null,
+// //         isAuthenticated: false,
+// //         loading: false,
+// //         error: null
+// //       };
+// //     }
+// //   }
+// //   return {
+// //     user: null,
+// //     isAuthenticated: false,
+// //     loading: false,
+// //     error: null
+// //   };
+// // };
+
+// // const initialState = loadUserFromStorage();
+
+// // const authSlice = createSlice({
+// //   name: 'auth',
+// //   initialState,
+// //   reducers: {
+// //     loginStart: (state) => {
+// //       state.loading = true;
+// //       state.error = null;
+// //     },
+// //     loginSuccess: (state, action) => {
+// //       state.loading = false;
+// //       state.isAuthenticated = true;
+// //       state.user = action.payload;
+// //       state.error = null;
+// //       // Store in localStorage
+// //       localStorage.setItem('user', JSON.stringify(action.payload));
+// //     },
+// //     loginFailure: (state, action) => {
+// //       state.loading = false;
+// //       state.error = action.payload;
+// //     },
+// //     logout: (state) => {
+// //       state.user = null;
+// //       state.isAuthenticated = false;
+// //       localStorage.removeItem('user');
+// //     }
+// //   }
+// // });
+
+// // export const { loginStart, loginSuccess, loginFailure, logout } = authSlice.actions;
+// // export default authSlice.reducer;
+
+
+import { createSlice } from '@reduxjs/toolkit';
+
+// Helper to safely load initial state
+const loadState = () => {
+  try {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const token = localStorage.getItem('token');
+    if (user && token) {
+      return { user, token, isAuthenticated: true, loading: false, error: null };
+    }
+  } catch (e) {
+    console.error("Failed to load state", e);
+  }
+  return { user: null, token: null, isAuthenticated: false, loading: false, error: null };
+};
+
+const initialState = loadState();
+
+const authSlice = createSlice({
+  name: 'auth',
+  initialState,
+  reducers: {
+    loginStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    loginSuccess: (state, action) => {
+      state.loading = false;
+      state.isAuthenticated = true;
+      
+      // Extract user and token from the payload
+      // (Handles both { token, user } and flat { token, id, role } structures)
+      const userData = action.payload.user || action.payload;
+      const token = action.payload.token;
+
+      state.user = userData;
+      state.token = token;
+
+      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('token', token);
+    },
+    loginFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    logout: (state) => {
+      state.user = null;
+      state.token = null;
+      state.isAuthenticated = false;
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+    },
+    // ... register reducers can be updated the same way
+  },
+});
+
+export const { loginStart, loginSuccess, loginFailure, logout } = authSlice.actions;
+export default authSlice.reducer;

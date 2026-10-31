@@ -1,8 +1,9 @@
 
 
 // API service for making HTTP requests to PostgreSQL backend
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-
+const API_URL =
+  import.meta.env.VITE_API_URL ||
+  "http://localhost:5000/api";
 // Helper function for handling responses
 const handleResponse = async (response) => {
   if (!response.ok) {
@@ -13,9 +14,12 @@ const handleResponse = async (response) => {
 };
 
 // Get token from localStorage
+// Change this:
+
+
+// To this:
 const getToken = () => {
-  const user = localStorage.getItem('user');
-  return user ? JSON.parse(user).token : null;
+  return localStorage.getItem('token'); // Much simpler and safer!
 };
 
 // Product APIs
