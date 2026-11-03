@@ -29,7 +29,7 @@ function AppContent() {
   const hideFooterOnPages = ['/login', '/register', '/admin'];
   const shouldHideFooter = hideFooterOnPages.includes(location.pathname);
 
-   const hideNavbarOnPages = ['/admin'];
+   const hideNavbarOnPages = ['/admin','/login','/register'];
   const shouldHideNavbar = hideNavbarOnPages.includes(location.pathname);
 
   return (
