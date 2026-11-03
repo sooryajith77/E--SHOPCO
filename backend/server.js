@@ -3,11 +3,11 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const { sequelize } = require('./models');
+
 const path = require('path'); 
 // Load env vars
 dotenv.config();
-
+const { sequelize } = require('./models');
 // Import routes
 const authRoutes = require('./routes/authRoutes');
 const productRoutes = require('./routes/productRoutes');
@@ -31,7 +31,10 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:5174'],
+  origin: [
+    "http://localhost:5173",
+    "https://e--shopco.soorya8590.workers.dev"
+  ],
   credentials: true
 }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
