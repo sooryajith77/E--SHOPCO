@@ -126,23 +126,105 @@
 // // export default authSlice.reducer;
 
 
+// import { createSlice } from '@reduxjs/toolkit';
+
+// // Helper to safely load initial state
+// const loadState = () => {
+//   try {
+//     const user = JSON.parse(localStorage.getItem('user'));
+//     const token = localStorage.getItem('token');
+//     if (user && token) {
+//       return { user, token, isAuthenticated: true, loading: false, error: null };
+//     }
+//   } catch (e) {
+//     console.error("Failed to load state", e);
+//   }
+//   return { user: null, token: null, isAuthenticated: false, loading: false, error: null };
+// };
+
+// const initialState = loadState();
+
+// const authSlice = createSlice({
+//   name: 'auth',
+//   initialState,
+//   reducers: {
+//     loginStart: (state) => {
+//       state.loading = true;
+//       state.error = null;
+//     },
+//     loginSuccess: (state, action) => {
+//       state.loading = false;
+//       state.isAuthenticated = true;
+      
+//       // Extract user and token from the payload
+//       // (Handles both { token, user } and flat { token, id, role } structures)
+//       const userData = action.payload.user || action.payload;
+//       const token = action.payload.token;
+
+//       state.user = userData;
+//       state.token = token;
+
+//       localStorage.setItem('user', JSON.stringify(userData));
+//       localStorage.setItem('token', token);
+//     },
+//     loginFailure: (state, action) => {
+//       state.loading = false;
+//       state.error = action.payload;
+//     },
+//     logout: (state) => {
+//       state.user = null;
+//       state.token = null;
+//       state.isAuthenticated = false;
+//       localStorage.removeItem('user');
+//       localStorage.removeItem('token');
+//     },
+//     // ... register reducers can be updated the same way
+//   },
+// });
+
+// export const { loginStart, loginSuccess, loginFailure, logout } = authSlice.actions;
+// export default authSlice.reducer;
+
+
+
+
+
+
+
+
+
+
 import { createSlice } from '@reduxjs/toolkit';
 
-// Helper to safely load initial state
-const loadState = () => {
+// Helper function to load initial state safely from localStorage
+const loadInitialState = () => {
   try {
     const user = JSON.parse(localStorage.getItem('user'));
     const token = localStorage.getItem('token');
+    
     if (user && token) {
-      return { user, token, isAuthenticated: true, loading: false, error: null };
+      return {
+        user,
+        token,
+        isAuthenticated: true,
+        loading: false,
+        error: null,
+      };
     }
-  } catch (e) {
-    console.error("Failed to load state", e);
+  } catch (error) {
+    console.error("Failed to parse user from localStorage", error);
   }
-  return { user: null, token: null, isAuthenticated: false, loading: false, error: null };
+
+  return {
+    user: null,
+    token: null,
+    isAuthenticated: false,
+    loading: false,
+    error: null,
+  };
 };
 
-const initialState = loadState();
+const initialState = loadInitialState();
 
 const authSlice = createSlice({
   name: 'auth',
@@ -156,8 +238,8 @@ const authSlice = createSlice({
       state.loading = false;
       state.isAuthenticated = true;
       
-      // Extract user and token from the payload
-      // (Handles both { token, user } and flat { token, id, role } structures)
+      // Extract user and token safely from the payload
+      // Handles both { token, user: {...} } and a flat { token, id, role } structure
       const userData = action.payload.user || action.payload;
       const token = action.payload.token;
 
@@ -178,9 +260,39 @@ const authSlice = createSlice({
       localStorage.removeItem('user');
       localStorage.removeItem('token');
     },
-    // ... register reducers can be updated the same way
+    registerStart: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+    registerSuccess: (state, action) => {
+      state.loading = false;
+      state.isAuthenticated = true;
+
+      // Extract user and token safely from the payload
+      const userData = action.payload.user || action.payload;
+      const token = action.payload.token;
+
+      state.user = userData;
+      state.token = token;
+
+      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('token', token);
+    },
+    registerFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout } = authSlice.actions;
+export const {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+  logout,
+  registerStart,
+  registerSuccess,
+  registerFailure,
+} = authSlice.actions;
+
 export default authSlice.reducer;

@@ -991,7 +991,7 @@ const Admin = () => {
               <td>#{order.id}</td>
               <td>{order.User?.name || order.customer || 'Guest'}</td>
               <td>{order.User?.email || order.email || 'N/A'}</td>
-              <td>{order.OrderItems?.length || order.items || 0}</td>
+             <td>{order.OrderItems?.length || order.items?.length || 0}</td>
               <td>${order.total_amount || order.total}</td>
               <td>    
                 <select 

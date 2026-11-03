@@ -6,9 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './Order.css';
 
-const API_URL = process.env.NODE_ENV === 'production'
-  ? '/api'
-  : 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const Orders = () => {
   const navigate = useNavigate();

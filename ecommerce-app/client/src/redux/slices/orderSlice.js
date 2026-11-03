@@ -3,8 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const getToken = () => {
-  const user = localStorage.getItem('user');
-  return user ? JSON.parse(user).token : null;
+  return localStorage.getItem('token');
 };
 
 // Async thunks for orders
