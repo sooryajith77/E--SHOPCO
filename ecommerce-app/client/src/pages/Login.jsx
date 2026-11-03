@@ -239,11 +239,7 @@ const Login = () => {
           </button>
         </form>
         
-        <div className="demo-credentials">
-          <p>Demo Credentials:</p>
-          <p><strong>Admin:</strong> admin@shop.co / admin123</p>
-          <p><strong>User:</strong> user@example.com / user123</p>
-        </div>
+      
         
         <p>
           Don't have an account? <Link to="/register">Register here</Link>
